@@ -1,0 +1,18 @@
+array de producto
+  name
+  descripcion
+  precio
+  cantidad
+  image
+
+envio
+total
+
+nombre y apellido
+dni 
+email
+codigo postal
+domicilio
+referencia
+
+e ir a pagar.

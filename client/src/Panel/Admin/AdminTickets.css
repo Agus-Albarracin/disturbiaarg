@@ -1,0 +1,232 @@
+.admin-panel-st {
+    padding: 20px;
+}
+
+.cards-container-ticket {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.card-ti {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.card-ti.mo{
+    background-color:  rgb(42, 102, 70);
+}
+.card-ti.ti{
+    background-color:#d17b92 ;
+}
+.card-ti.mone{
+    background-color:rgb(0, 0, 0) ;
+}
+.card-ti.mo:hover{
+    background-color: rgb(47, 114, 79);
+}
+.card-ti.ti:hover{
+    background-color:#fa99b3 ;
+}
+.card-ti.mone:hover{
+    background-color:rgb(45, 45, 45) ;
+}
+.ti-title{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+.ti-sum{
+  font-size: 20px;
+}
+.tilink{
+    display: flex;
+    color: #e98ea7;
+    font-weight: bold;
+}
+.ptitleti {
+    display: flex;
+    font-size: 40px;
+    font-weight: bold;
+    color: #e98ea7;
+    justify-content: center;
+    margin-top: 6%;
+}
+
+
+.table-container {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table thead{
+    background-color: #e98ea7;
+}
+.table th, .table td {
+    padding: 8px;
+    text-align: left;
+    border: 3px solid #333;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pagination button{
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.pagination button:hover {
+    background-color: #797979;
+}
+
+.button-en-espera {
+    background-color: rgb(234, 136, 7);
+    padding: 8px 16px;
+    border: inset;
+    border-color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+}
+
+
+.button-chequeado {
+    background-color: green;
+    padding: 8px 16px;
+    border: inset;
+    border-color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+}
+
+.button-en-espera:hover {
+    background-color: rgb(255, 153, 58);
+    border-color: white;
+}
+
+.button-chequeado:hover {
+    background-color: rgb(0, 160, 0);
+    border-color: white;
+}
+
+/* FILTER BUTTONS*/
+.filter-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #4e4e4e;
+}
+
+.kit-bars {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .search-data{
+    width: 400px;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .search-date {
+    width: 200px;
+    max-width: auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .filter-buttons {
+    display: flex;
+  }
+  
+  .filter-btn {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .filter-btn:hover {
+    background-color: #0056b3;
+  }
+
+@media (max-width: 768px) {
+
+    .cards-container-ticket {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .card-ti {
+         width: 300px;
+    }
+    .kit-bars {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap:20px;
+      }
+
+      .search-data{
+        width: 300px;
+        max-width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    
+}

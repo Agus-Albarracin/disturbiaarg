@@ -1,0 +1,74 @@
+.carrito-cont {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  
+  .carrito-cont h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .carrito-cont > div {
+    margin-top: 20px;
+  }
+  .productos-cont {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+  }
+  
+  .p-carrito {
+    cursor: pointer;
+    margin: 5px 20px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .p-carrito-descrip {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    max-width: 300px;
+    max-height: 300px;
+    width: 300px;
+    height:100px;
+    overflow:auto;
+    color: #333;
+  }
+
+  
+  .p-carrito:last-of-type {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .carrito-cont > p {
+    text-align: right;
+    font-size: 20px;
+    color: #333;
+    margin-top: 10px;
+  }
+
+  .carrito-img{
+    max-width: 80px;
+    width: 100px;
+    max-height: 150px;
+    height: 150px;
+    border-radius: 10px;
+  }
+  
+  .carrito-cont > p:nth-of-type(1) {
+    margin-top: 20px;
+  }
+  
+
+  

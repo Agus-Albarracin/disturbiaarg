@@ -1,0 +1,196 @@
+.admin-nav {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: black;
+}
+
+.admin-nav button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.admin-nav button:hover {
+    background-color: #e98ea7;
+}
+
+.admin-panel {
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.section {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.flex-container-car {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.section li img {
+    margin-right: 10px;
+}
+
+.section h1 {
+    margin-bottom: 15px;
+    color: #e98ea7;
+}
+
+.section label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section input[type="text"],
+.section input[type="email"],
+.section input[type="tel"],
+.section input[type="number"],
+.section input[type="file"] {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.section button {
+    background-color: #e98ea7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+
+.section button:hover {
+    background-color: #333;
+}
+
+.price-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.price-input label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+
+    .admin-nav {
+        height: 60px;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-right: 2%;
+        padding-left: 2%;
+    }
+
+    .admin-nav > * { 
+        display: flex;
+        justify-content: center;
+        max-width: 60px; 
+        font-size: 10px; 
+    }
+
+    .admin-nav-btn{
+        height: 30px;
+        padding: 20px 10px;
+        border-radius: 4px;
+    }
+
+    .admin-panel {
+        padding: 20px;
+        background-color: #f3f3f3;
+        color: #333;
+        font-family: Arial, sans-serif;
+    }
+
+    .section {
+        flex: 1;
+        max-width: 300px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .flex-container-car-img{
+        width: 250px;
+    }
+    .price-input {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .price-input label {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-containernav {
+        flex-direction: column;
+    }
+
+    .flex-container input[type="file"] {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .flex-container-car {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

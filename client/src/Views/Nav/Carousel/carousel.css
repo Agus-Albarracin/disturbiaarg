@@ -1,0 +1,16 @@
+.gallery-cont{
+    padding: 40px;
+}
+.image-gallery-slides{
+    border-radius: 30px;
+}
+
+@media screen and (max-width: 600px) {
+    .gallery-cont{
+        padding: 0px;
+    }
+
+    .image-gallery-slides{
+        border-radius: 5px;
+    }
+}

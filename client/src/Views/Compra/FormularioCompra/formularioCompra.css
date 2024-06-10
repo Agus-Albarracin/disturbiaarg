@@ -1,0 +1,108 @@
+.compra-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  
+  .compra-formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .p-formCompra {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .inputs-formCont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .input-formData {
+    width: 350px;
+    max-width: 350px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+  }
+
+  .input-formData-amp {
+    font-family: Arial, sans-serif;
+    width: calc(370px - 22px); 
+    max-width: 400px;
+    min-height: 100px; 
+    max-height: 300px; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5; 
+    resize: vertical; 
+    overflow-y: auto; 
+    background-color: #333;
+    color: #fff;
+  }  
+  .input-formData.full-width {
+    grid-column: span 2;
+    height: 60px; 
+  }
+  
+  .btn-fomrCompra {
+    width: 50%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+  }
+  
+  .loading{
+    background-color: #87ceeb; 
+    background-image: linear-gradient(to right, #53b8e1 50%, #4682b4 50%); /* Gradiente de celeste claro a oscuro */
+    background-size: 200% 100%; /* Doble del ancho para permitir el desplazamiento */
+    transition: background-position 5s; /* Transición de 3 segundos para el cambio de color */
+  }
+  
+  .loading{
+    background-position: -100% 0; /* Desplazamiento completo a la derecha */
+  }
+  
+  @media screen and (max-width: 600px) {
+    .compra-container {
+      max-width: 90%;
+    }
+    
+    .inputs-formCont {
+      grid-template-columns: 1fr;
+    }
+    
+    .input-formData,
+    .input-formData-amp,
+    .input-formData.full-width,
+    .btn-fomrCompra {
+      width: 100%;
+    }
+  }

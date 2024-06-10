@@ -1,0 +1,37 @@
+
+.shipping-options {
+background-color: black;
+padding: 20px;
+max-width: 700px;
+width: 100%;
+margin-top: 5%;
+margin-bottom: 5%;
+overflow: hidden;
+border-radius: 40px;
+}
+
+.shipping-options h3 {
+    color: White;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.shipping-options h5{
+    display: block;
+}
+.shipping-options label {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .shipping-options {
+        max-width: 350px;
+        width: 100%;
+        overflow: hidden;
+        }
+
+}

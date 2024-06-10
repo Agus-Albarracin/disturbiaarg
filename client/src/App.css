@@ -1,0 +1,25 @@
+/* Estilos para Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho del scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Fondo del track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e98ea7; /* Color del pulgar */
+  border-radius: 20px; /* Borde redondeado */
+  border: 3px solid #e98ea7; /* Espacio alrededor del pulgar */
+}
+
+@media screen and (max-width: 600px) {
+
+    .section-app{
+      margin: 10px;
+      padding: 5px  ;
+      box-sizing: border-box;
+    }
+  
+  }
+  

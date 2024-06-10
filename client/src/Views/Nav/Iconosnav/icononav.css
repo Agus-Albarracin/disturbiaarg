@@ -1,0 +1,19 @@
+.icononav {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+    border-radius: 80px;
+    padding: 40px;
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+    .icononav {
+        margin-top: 5px;
+        border-radius: 10px;
+        padding: 0px;
+    }
+}

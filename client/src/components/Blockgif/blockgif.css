@@ -1,0 +1,50 @@
+.blockgif {
+    display: flex;
+    max-width: 100%;
+    margin-top: 5%;
+}
+
+.blockgif-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.gif{
+    margin-left: 20%;
+    margin-bottom: 7%;
+    width: 70%;
+    height: 70%;
+}
+
+
+.follow-button {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-bottom: 3%;
+    border-radius: 8px;
+    background-color: black; 
+    color:#e98ea7;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.follow-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.instagram-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.follow-button span {
+    vertical-align: middle;
+}
