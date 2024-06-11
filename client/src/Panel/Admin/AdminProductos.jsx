@@ -60,7 +60,7 @@ const AdminProducts = () => {
         };
       }
 
-      const response = await axios.get("http://localhost:3000/api/productsadmin", {
+      const response = await axios.get("https://disturbiaarg.com/api/productsadmin", {
         params
       });
       const productsData = response.data;
@@ -123,13 +123,11 @@ const AdminProducts = () => {
           }
         });
 
-        console.log("se muestran las urls?", imagesUrls);
 
         // Reemplazar la propiedad "images" con el nuevo array de URLs
 
         const elproductoacualizado = { ...originalProductData, images: imagesUrls };
 
-        console.log("Se envia", elproductoacualizado)
         toast.loading('Loading data');
 
         // Llamar a la función de actualización del producto con solo las URLs de las imágenes
@@ -159,13 +157,11 @@ const AdminProducts = () => {
   const updateProduct = async (productId, updatedProduct) => {
 
     try {
-      console.log('Updating product with data:', updatedProduct);
-      const response = await axios.post(`http://localhost:3000/api/objects/${productId}`, updatedProduct, {
+      const response = await axios.post(`https://disturbiaarg.com/api/objects/${productId}`, updatedProduct, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Update response:', response.data);
 
       const updatedProducts = products.map(product => {
         if (product.id === productId) {
@@ -205,7 +201,7 @@ const AdminProducts = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/products/${productId}`);
+      await axios.delete(`https://disturbiaarg.com/api/products/${productId}`);
       setProducts(products.filter(product => product.id !== productId));
       toast.success("Se elimino el producto con éxito.")
     } catch (error) {
@@ -264,7 +260,6 @@ const AdminProducts = () => {
 
   const handleCreateProduct = async () => {
     try {
-      console.log('Creando producto con los siguientes datos:', newProduct);
   
       let imagesUrls = [];
   
@@ -312,15 +307,13 @@ const AdminProducts = () => {
            ...newProduct, 
            images: imagesUrls,
            categoria: newProduct.categoria || "Otros" };
-        console.log('Product with images:', productWithImages);
 
-        const response = await axios.post('http://localhost:3000/api/products', productWithImages, {
+        const response = await axios.post('https://disturbiaarg.com/api/products', productWithImages, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
 
-        console.log('Create response:', response.data);
 
         setProducts([...products, response.data]);
 
@@ -345,12 +338,10 @@ const AdminProducts = () => {
 };
 
   const handleRemoveImage = (deleteIdToRemove) => {
-    console.log('Removing image with deleteId:', deleteIdToRemove);
 
     // Actualiza el estado de imagesPreview eliminando la imagen con el deleteId correspondiente
     setImagesPreview((prevImages) => {
       const updatedImagesPreview = prevImages.filter((image) => image.deleteId !== deleteIdToRemove);
-      console.log('Updated imagesPreview:', updatedImagesPreview);
 
       // Después de actualizar imagesPreview, actualiza newProduct con las URLs de updatedImagesPreview
       setNewProduct((prevProduct) => {
@@ -373,10 +364,6 @@ const AdminProducts = () => {
     setImagesPreview(imageUrls);
     setNewProduct({ ...newProduct, images: filesArray });
 
-    // Imprimir los nombres de los archivos
-    filesArray.forEach(file => {
-      console.log('Nombre del archivo:', file.name);
-    });
   };
 
   function SmallImage({ image }) {
@@ -427,8 +414,7 @@ const AdminProducts = () => {
 
   const obtenerCategorias = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/products/categorias");
-      console.log(response.data)
+      const response = await axios.get("https://disturbiaarg.com/api/products/categorias");
       setOptions(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);

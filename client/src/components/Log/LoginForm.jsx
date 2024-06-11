@@ -29,9 +29,7 @@ const GoogleLoginComponent = () => {
     }, []);
 
     const onSuccess = async (credentialResponse) => {
-        console.log(credentialResponse);
-        const res = await xpicker("http://localhost:3000/log/usuario", credentialResponse);
-        console.log("Se muestra res", res);
+        const res = await xpicker("https://disturbiaarg.com/log/usuario", credentialResponse);
 
         if (res && res.user) {
             const picUrl = res.user.picture;
@@ -41,14 +39,12 @@ const GoogleLoginComponent = () => {
             localStorage.setItem('picture', picUrl);
             localStorage.setItem("logged", "true");
 
-            console.log('Token guardado:', newToken);
-            console.log('se muestra picture', picUrl);
 
             setToken(newToken);
             setPic(picUrl);
             setIsLogin(true);
         } else {
-            console.log("No se encontró una imagen en la respuesta");
+            console.log("Hubo un error al cargar la imagen");
         }
     };
 

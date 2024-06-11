@@ -20,7 +20,6 @@ const ShippingOptions = ({ onShippingChange }) => {
     }, [selectedOption, onShippingChange, shippingPrices]);
 
     const handleOptionChange = (event) => {
-        console.log("Se muestra el valor de cambio", event.target.value)
         setSelectedOption(event.target.value);
         setModoEnvio(event.target.value)
     };

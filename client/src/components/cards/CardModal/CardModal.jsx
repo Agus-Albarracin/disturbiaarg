@@ -17,7 +17,6 @@
         console.log(selectedImage )
         const handleAddToCart = () => {
             const product = { id, name, price, image: selectedImage, descripcion, quantity: 1}; 
-            console.log("is producto inside",product)
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || []; 
             cartItems.push(product); 
             localStorage.setItem('cartItems', JSON.stringify(cartItems));

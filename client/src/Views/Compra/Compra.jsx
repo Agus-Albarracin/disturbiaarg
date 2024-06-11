@@ -15,13 +15,10 @@ const Compra = () => {
   };
 
   useEffect(() => {
-    console.log("mostra esto:", modoEnvio)
   }, [modoEnvio]);
 
   
   const handleFinalizarCompra = async (datosCompra) => {
-    console.log(datosCompra, {cart: cartItems}, selectedShippingOption.price)
-    console.log("SENVIO:", modoEnvio)
     try {
       const response = await axios.post('http://localhost:3000/api/createOrder',{
         data : datosCompra,

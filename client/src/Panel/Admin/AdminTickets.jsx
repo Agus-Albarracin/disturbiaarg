@@ -27,10 +27,9 @@ const AdminTickets = () => {
 
     const fetchTickets = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/tickets?page=${currentPage}&limit=${ticketsPerPage}&filter=${filter}&search=${searchQuery}&date=${searchDate}`);
+            const response = await axios.get(`https://disturbiaarg.com/api/tickets?page=${currentPage}&limit=${ticketsPerPage}&filter=${filter}&search=${searchQuery}&date=${searchDate}`);
             setTickets(response.data.tickets);
             setTotalPages(response.data.totalPages);
-            console.log(response.data)
         } catch (error) {
             console.error('Error fetching tickets:', error);
         }
@@ -38,7 +37,7 @@ const AdminTickets = () => {
 
     const fetchSummary = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/tickets/summary');
+            const response = await axios.get('https://disturbiaarg.com/api/tickets/summary');
             setSummary(response.data);
         } catch (error) {
             console.error('Error fetching summary:', error);
@@ -61,7 +60,7 @@ const AdminTickets = () => {
         const newEstado = currentEstado === 'En espera' ? 'Chequeado' : 'En espera';
 
         try {
-            await axios.put(`http://localhost:3000/api/ticketstatus/${ticketId}`, { estadoTicket: newEstado });
+            await axios.put(`https://disturbiaarg.com/api/ticketstatus/${ticketId}`, { estadoTicket: newEstado });
             setTickets(tickets.map(ticket =>
                 ticket.ticket_id === ticketId ? { ...ticket, estadoTicket: newEstado } : ticket
             ));
