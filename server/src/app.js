@@ -49,7 +49,7 @@ app.use("/api", navCarouselRoutes);
 app.use("/api", footerRoutes);
 app.use("/api", btnnavRoutes);
 app.use("/api", shippingpricesRoutes);
-app.use("/log", usuarioRoutes);
+app.use("/api", usuarioRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", payRoutes);
 app.use("/api", ticketsRoutes);

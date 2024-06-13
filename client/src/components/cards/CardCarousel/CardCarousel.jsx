@@ -21,7 +21,7 @@ const CardCarousel = () => {
 
     const fetchFilteredData = async (filterType, setState) => {
         try {
-            const response = await axios.get(`https://disturbiaarg.com/api/products?filterType=${filterType}`);
+            const response = await axios.get(`http://localhost:3000/api/products?filterType=${filterType}`);
             const { data } = response;
             setState(data);
         } catch (error) {
@@ -47,6 +47,8 @@ const CardCarousel = () => {
 
     return (
         <>
+        <div className='sliders-cont'> 
+
             <div className="slider-cont">
                 <div className="title-container">
                     <h1 className="title">♥ Lo más vendido</h1>
@@ -89,6 +91,8 @@ const CardCarousel = () => {
                     </Slider>
                 </div>
             </div>
+
+        </div>
 
             {selectedItem && (
                 <CardModal

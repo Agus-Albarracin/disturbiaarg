@@ -14,7 +14,6 @@
         const handleImageClick = (newImage) => {
             setSelectedImage(newImage);
         };
-        console.log(selectedImage )
         const handleAddToCart = () => {
             const product = { id, name, price, image: selectedImage, descripcion, quantity: 1}; 
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || []; 

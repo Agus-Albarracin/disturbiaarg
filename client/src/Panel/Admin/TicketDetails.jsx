@@ -19,7 +19,7 @@ const TicketDetails = () => {
         const checkAdminPermission = async () => {
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await axios.get('https://disturbiaarg.com/api/admin', {
+                const response = await axios.get('http://localhost:3000/api/admin', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -37,7 +37,7 @@ const TicketDetails = () => {
     useEffect(() => {
         const fetchTicketDetails = async () => {
             try {
-                const response = await axios.get(`https://disturbiaarg.com/api/tickets/${ticketId}`);
+                const response = await axios.get(`http://localhost:3000/api/tickets/${ticketId}`);
                 setTicket(response.data);
                 setLoading(false);
             } catch (error) {

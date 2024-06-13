@@ -168,23 +168,23 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-export const getCategorias = async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT DISTINCT categoria FROM products WHERE categoria IS NOT NULL");
+  export const getCategorias = async (req, res) => {
+    try {
+      const [rows] = await pool.query("SELECT DISTINCT categoria FROM products WHERE categoria IS NOT NULL");
 
-    // Obtener solo las categorías únicas utilizando un Set
-    const categoriasSet = new Set();
-    rows.forEach(row => categoriasSet.add(row.categoria));
+      // Obtener solo las categorías únicas utilizando un Set
+      const categoriasSet = new Set();
+      rows.forEach(row => categoriasSet.add(row.categoria));
 
-    // Convertir el conjunto a un array
-    const categorias = Array.from(categoriasSet);
+      // Convertir el conjunto a un array
+      const categorias = Array.from(categoriasSet);
 
-    res.json(categorias);
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    res.status(500).json({ error: "Error fetching categories" });
-  }
-};
+      res.json(categorias);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      res.status(500).json({ error: "Error fetching categories" });
+    }
+  };
 
 export const filterProductsByCategoria = async (req, res) => {
   try {

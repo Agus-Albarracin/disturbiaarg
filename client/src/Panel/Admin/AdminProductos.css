@@ -124,6 +124,9 @@
     right: 0;
     padding: 5px;
   }
+  .quit-btn-small{
+    z-index: 1090;
+   }
 
   .filter-bar {
     display: flex;
@@ -234,6 +237,7 @@
   max-width: 200px;
   width: 90%;
  }
+
 
   @media (max-width: 767px) {
     .admin-products-container {

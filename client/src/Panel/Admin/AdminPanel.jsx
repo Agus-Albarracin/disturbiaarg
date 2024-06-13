@@ -9,15 +9,15 @@ import AdminTickets from './AdminTickets';
 import axios from "axios"
 
 const AdminPanel = () => {
-  const { 
+  const {
     //BTN NAVBAR
     btnnavLink, updateBtnnavLink,
     // CAROUSEL
-    carouselImages, addImage, removeImage ,
+    carouselImages, addImage, removeImage,
     // SIDE BAR
     shippingPrices, updateShippingPrices, setShippingPrices,
     // FOOTER
-    footerInfo, updateFooterInfo, handleFooterChange 
+    footerInfo, updateFooterInfo, handleFooterChange
   } = useContext(AppContext);
 
 
@@ -31,21 +31,21 @@ const AdminPanel = () => {
   // CAROUSEL
   const [selectedImage, setSelectedImage] = useState(null);
 
-   //ACCESS 
-   const navigate = useNavigate();
-   const [isAdmin, setIsAdmin] = useState(false);
- 
-   useEffect(() => {
+  //ACCESS 
+  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
     const checkAdminPermission = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        
-        const response = await axios.get('https://disturbiaarg.com/api/admin', {
+
+        const response = await axios.get('http://localhost:3000/api/admin', {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         });
-        
+
         setIsAdmin(true);
       } catch (error) {
         navigate("/");
@@ -59,7 +59,7 @@ const AdminPanel = () => {
   // VIEWS
   const handleSectionChange = (section) => {
     setActiveSection(section);
-    localStorage.setItem('activeSection', section); 
+    localStorage.setItem('activeSection', section);
   };
 
   // BTN NAVBAR
@@ -100,7 +100,17 @@ const AdminPanel = () => {
       console.error('Error uploading image to Cloudinary:', error);
     }
   };
-  
+
+  const handleRemoveImage = async (img_key) => {
+    try {
+        await removeImage(img_key);
+        toast.success("Imagen eliminada exitosamente.");
+    } catch (error) {
+        console.error('Error removing image:', error);
+        toast.error("Error al eliminar la imagen.");
+    }
+};
+
   //SIDEBAR PRICE
 
   const handlePriceChange = (event, shippingOption) => {
@@ -133,7 +143,7 @@ const AdminPanel = () => {
 
   return isAdmin ? (
     <>
-    <Toaster />
+      <Toaster />
       <nav className="admin-nav">
         <button className='admin-nav-btn' onClick={() => handleSectionChange('edit')}>Edición</button>
         <button className='admin-nav-btn' onClick={() => handleSectionChange('products')}>Productos</button>
@@ -145,39 +155,39 @@ const AdminPanel = () => {
         <div className="admin-panel">
           <div className="flex-container">
 
-          <div className="section">
-            <h1>Editar link del botón wspp.</h1>
-            <div className="flex-containernav">
+            <div className="section">
+              <h1>Editar link del botón wspp.</h1>
+              <div className="flex-containernav">
 
-              <label>
-                Enlace de WhatsApp:
-                <input type="text" value={newBtnnavLink} onChange={handleBtnnavLinkChange} />
-                <button onClick={handleUpdateBtnnavLink}>Actualizar Enlace</button>
-              </label>
+                <label>
+                  Enlace de WhatsApp:
+                  <input type="text" value={newBtnnavLink} onChange={handleBtnnavLinkChange} />
+                  <button onClick={handleUpdateBtnnavLink}>Actualizar Enlace</button>
+                </label>
+              </div>
+
             </div>
 
-          </div>
-
-          <div className="section">
-            <h1>Editar Carrusel</h1>
-            <h5><em>IMPORTANTE: Para una mejor ilustración de los banners, utiliza 1080x300.</em></h5>
-            <h5><em>Maximo: 5 imagenes, para buena perfomance.</em></h5>
-            <div className="flex-container-car">
-              <input type="file" onChange={handleImageChange} />
-              <button onClick={handleAddImage}>Agregar Imagen</button>
-            </div>
-            <ul>
+            <div className="section">
+              <h1>Editar Carrusel</h1>
+              <h5><em>IMPORTANTE: Para una mejor ilustración de los banners, utiliza 1080x300.</em></h5>
+              <h5><em>Maximo: 5 imagenes, para buena perfomance.</em></h5>
+              <div className="flex-container-car">
+                <input type="file" onChange={handleImageChange} />
+                <button onClick={handleAddImage}>Agregar Imagen</button>
+              </div>
+              <ul>
               {carouselImages.map((image, index) => (
-                <li key={index}  className='flex-container-car'>
-                  <img className="flex-container-car-img" loading="lazy" src={image.original} alt={`carousel ${index}`} width="300" />
-                  <button onClick={() => removeImage(index)}>Eliminar</button>
-                </li>
-              ))}
-            </ul>
-          </div>
+  <li key={index} className='flex-container-car'>
+    <img className="flex-container-car-img" loading="lazy" src={image.original} alt={`carousel ${index}`} width="300" />
+    <button onClick={() => handleRemoveImage(image.img_key)}>Eliminar</button>
+  </li>
+))}
+              </ul>
+            </div>
           </div>
 
-          
+
           <div className="flex-container">
             <div className="section">
               <h1>Editar precios de envío</h1>
@@ -222,8 +232,8 @@ const AdminPanel = () => {
         <AdminTickets />
       )}
     </>
-  ) : 
-  <h1> No tiene acceso a esta página.</h1>
+  ) :
+    <h1> No tiene acceso a esta página.</h1>
 };
 
 export default AdminPanel;

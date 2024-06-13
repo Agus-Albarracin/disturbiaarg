@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { CSS } from '@dnd-kit/utilities';
 import { DndContext, closestCenter } from '@dnd-kit/core';
+import {MouseSensor, TouchSensor, useSensor, useSensors} from '@dnd-kit/core';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { arrayMoveImmutable } from 'array-move';
 
@@ -32,6 +33,8 @@ const AdminProducts = () => {
   const [filter, setFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const limit = 3;
+  const [options, setOptions] = useState([]);
+
 
   useEffect(() => {
     fetchProducts(1, filter, searchQuery, true);
@@ -41,6 +44,27 @@ const AdminProducts = () => {
   useEffect(() => {
     obtenerCategorias();
   }, []);
+
+
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 10,
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    // Press delay of 250ms, with tolerance of 5px of movement
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+
+  const sensors = useSensors(
+    mouseSensor,
+    touchSensor,
+  );
+
 
 
   const fetchProducts = async (page, filter, search, reset = false) => {
@@ -60,7 +84,7 @@ const AdminProducts = () => {
         };
       }
 
-      const response = await axios.get("https://disturbiaarg.com/api/productsadmin", {
+      const response = await axios.get("http://localhost:3000/api/productsadmin", {
         params
       });
       const productsData = response.data;
@@ -157,7 +181,7 @@ const AdminProducts = () => {
   const updateProduct = async (productId, updatedProduct) => {
 
     try {
-      const response = await axios.post(`https://disturbiaarg.com/api/objects/${productId}`, updatedProduct, {
+      const response = await axios.post(`http://localhost:3000/api/objects/${productId}`, updatedProduct, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -201,7 +225,7 @@ const AdminProducts = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      await axios.delete(`https://disturbiaarg.com/api/products/${productId}`);
+      await axios.delete(`http://localhost:3000/api/products/${productId}`);
       setProducts(products.filter(product => product.id !== productId));
       toast.success("Se elimino el producto con éxito.")
     } catch (error) {
@@ -221,6 +245,10 @@ const AdminProducts = () => {
       novedades: false,
       promociones: false
     })
+    toast.success("Se cancelo la actualización")
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
   }
 
 
@@ -301,6 +329,21 @@ const AdminProducts = () => {
     return imagesUrls;
   };
 
+  const handleRemoveImage = (deleteIdToRemove) => {
+    console.log("hice click")
+    // Filtrar la imagen con el deleteId correspondiente y eliminarla
+    const updatedImagesPreview = imagesPreview.filter((image) => image.deleteId !== deleteIdToRemove);
+  
+    // Actualizar las imágenes previas en el estado
+    setImagesPreview(updatedImagesPreview);
+  
+    // Actualizar el estado del nuevo producto con las URLs actualizadas
+    setNewProduct((prevProduct) => {
+      const updatedImages = updatedImagesPreview.map((image) => image.url);
+      return { ...prevProduct, images: updatedImages };
+    });
+  };
+
   const createProductWithImages = async (imagesUrls) => {
     try {
         const productWithImages = {
@@ -308,7 +351,7 @@ const AdminProducts = () => {
            images: imagesUrls,
            categoria: newProduct.categoria || "Otros" };
 
-        const response = await axios.post('https://disturbiaarg.com/api/products', productWithImages, {
+        const response = await axios.post('http://localhost:3000/api/products', productWithImages, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -337,21 +380,6 @@ const AdminProducts = () => {
     }
 };
 
-  const handleRemoveImage = (deleteIdToRemove) => {
-
-    // Actualiza el estado de imagesPreview eliminando la imagen con el deleteId correspondiente
-    setImagesPreview((prevImages) => {
-      const updatedImagesPreview = prevImages.filter((image) => image.deleteId !== deleteIdToRemove);
-
-      // Después de actualizar imagesPreview, actualiza newProduct con las URLs de updatedImagesPreview
-      setNewProduct((prevProduct) => {
-        const updatedImages = updatedImagesPreview.map((image) => image.url);
-        return { ...prevProduct, images: updatedImages };
-      });
-
-      return updatedImagesPreview;
-    });
-  };
 
   const handleImageChange = (e) => {
     const filesArray = Array.from(e.target.files);
@@ -409,12 +437,11 @@ const AdminProducts = () => {
     }
   };
 
-  const [options, setOptions] = useState([]);
 
 
   const obtenerCategorias = async () => {
     try {
-      const response = await axios.get("https://disturbiaarg.com/api/products/categorias");
+      const response = await axios.get("http://localhost:3000/api/products/categorias");
       setOptions(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -471,6 +498,7 @@ const AdminProducts = () => {
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
+          sensors={sensors}
         >
           <SortableContext
             items={imagesPreview}
