@@ -25,7 +25,7 @@ const Catalogo = () => {
 
   const fetchData = async (selectedCategories) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/products/cat`, {
+      const response = await axios.get(`http://localhost:3000/api/products/cat`, {
         params: { category: selectedCategories.join(',') } // Pass multiple categories as comma-separated string
       });
       const { data } = response;
@@ -37,7 +37,7 @@ const Catalogo = () => {
 };
 const getCat = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/api/products/categorias");
+    const response = await axios.get("http://localhost:3000/api/products/categorias");
     const { data } = response;
     setCat(data);
   } catch (error) {
