@@ -84,7 +84,7 @@ const AdminProducts = () => {
         };
       }
 
-      const response = await axios.get("http://localhost:3000/api/productsadmin", {
+      const response = await axios.get("https://disturbiaarg.com/api/productsadmin", {
         params
       });
       const productsData = response.data;
@@ -181,7 +181,7 @@ const AdminProducts = () => {
   const updateProduct = async (productId, updatedProduct) => {
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/objects/${productId}`, updatedProduct, {
+      const response = await axios.post(`https://disturbiaarg.com/api/objects/${productId}`, updatedProduct, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -225,7 +225,7 @@ const AdminProducts = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/products/${productId}`);
+      await axios.delete(`https://disturbiaarg.com/api/products/${productId}`);
       setProducts(products.filter(product => product.id !== productId));
       toast.success("Se elimino el producto con éxito.")
     } catch (error) {
@@ -288,70 +288,60 @@ const AdminProducts = () => {
 
   const handleCreateProduct = async () => {
     try {
-  
-      let imagesUrls = [];
-  
-      if (newProduct.images && newProduct.images.length > 0) {
-        // Si newProduct.images contiene URLs o archivos de tipo File, sube las imágenes a Cloudinary
-      toast.loading('Cargando datos');
-        imagesUrls = await uploadImages(newProduct.images);
-      } else {
-        console.error('No hay imágenes para subir o las imágenes no son válidas');
-      }
+        let imagesUrls = [];
+        
+        if (newProduct.images && newProduct.images.length > 0) {
+            toast.loading('Cargando datos');
+            console.log('Imágenes para subir:', newProduct.images); // Verificar imágenes
+            imagesUrls = await uploadImages(newProduct.images);
+            console.log('URLs de las imágenes subidas:', imagesUrls); // Verificar URLs subidas
+        } else {
+            console.error('No hay imágenes para subir o las imágenes no son válidas');
+        }
+        
         await createProductWithImages(imagesUrls);
-  
     } catch (error) {
-      console.error('Error al crear el producto:', error);
+        console.error('Error al crear el producto:', error);
     }
-  };
+};
   
-  const uploadImages = async (images) => {
-    const imagesUrls = [];
-  
-    for (let i = 0; i < images.length; i++) {
+const uploadImages = async (images) => {
+  const imagesUrls = [];
+
+  for (let i = 0; i < images.length; i++) {
       try {
-        const data = new FormData();
-        data.append("file", images[i].file || images[i]); // Sube el archivo si existe, de lo contrario, sube la URL
-        data.append("upload_preset", "w8qdkdel");
-        const cloudName = "dtw1galuw";
-  
-        const response = await axios.post(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          data
-        );
-  
-        imagesUrls.push(response.data.secure_url);
+          const data = new FormData();
+          if (images[i].file) { // Verificar que el archivo está definido
+              console.log('Archivo a subir:', images[i].file);
+              data.append("file", images[i].file);
+              data.append("upload_preset", "w8qdkdel");
+              const cloudName = "dtw1galuw";
+
+              const response = await axios.post(
+                  `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                  data
+              );
+
+              imagesUrls.push(response.data.secure_url);
+          } else {
+              console.error('Archivo no definido para la imagen en el índice', i);
+          }
       } catch (error) {
-        console.log('Error al subir la imagen:', error);
+          console.log('Error al subir la imagen:', error);
       }
-    }
-  
-    return imagesUrls;
-  };
+  }
 
-  const handleRemoveImage = (deleteIdToRemove) => {
-    console.log("hice click")
-    // Filtrar la imagen con el deleteId correspondiente y eliminarla
-    const updatedImagesPreview = imagesPreview.filter((image) => image.deleteId !== deleteIdToRemove);
+  return imagesUrls;
+};
   
-    // Actualizar las imágenes previas en el estado
-    setImagesPreview(updatedImagesPreview);
-  
-    // Actualizar el estado del nuevo producto con las URLs actualizadas
-    setNewProduct((prevProduct) => {
-      const updatedImages = updatedImagesPreview.map((image) => image.url);
-      return { ...prevProduct, images: updatedImages };
-    });
-  };
-
   const createProductWithImages = async (imagesUrls) => {
     try {
-        const productWithImages = {
-           ...newProduct, 
+      const productWithImages = {
+        ...newProduct, 
            images: imagesUrls,
            categoria: newProduct.categoria || "Otros" };
-
-        const response = await axios.post('http://localhost:3000/api/products', productWithImages, {
+           
+        const response = await axios.post('https://disturbiaarg.com/api/products', productWithImages, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -377,48 +367,105 @@ const AdminProducts = () => {
     } catch (error) {
         toast.error("Hubo un error al crear el producto.");
         console.error("hubo en error", error);
-    }
-};
-
-
-  const handleImageChange = (e) => {
-    const filesArray = Array.from(e.target.files);
-    const imageUrls = filesArray.map((file, index) => ({
-      id: `image-${index}-${Date.now()}`,
-      deleteId: `delete-${index}-${Date.now()}`, // Identificador para el borrado
-      url: URL.createObjectURL(file),
-      file: file
-    }));
-    setImagesPreview(imageUrls);
-    setNewProduct({ ...newProduct, images: filesArray });
-
-  };
-
-  function SmallImage({ image }) {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: image.id });
-    const style = {
-      transform: CSS.Transform.toString(transform),
-      transition,
-      position: 'relative',
+      }
     };
-
+    
+    
+    const handleImageChange = (e) => {
+      const filesArray = Array.from(e.target.files);
+      const imageUrls = filesArray.map((file, index) => ({
+          id: `image-${index}-${Date.now()}`,
+          deleteId: `delete-${index}-${Date.now()}`, // Identificador para el borrado
+          url: URL.createObjectURL(file),
+          file: file
+      }));
+      setImagesPreview(imageUrls);
+      setNewProduct({ ...newProduct, images: imageUrls }); // Ajuste aquí para mantener la estructura correcta
+  };
+  
+  
+    const handleRemoveImage = (deleteIdToRemove) => {
+      console.log("hice click")
+      // Filtrar la imagen con el deleteId correspondiente y eliminarla
+      const updatedImagesPreview = imagesPreview.filter((image) => image.deleteId !== deleteIdToRemove);
+    
+      // Actualizar las imágenes previas en el estado
+      setImagesPreview(updatedImagesPreview);
+    
+      // Actualizar el estado del nuevo producto con las URLs actualizadas
+      setNewProduct((prevProduct) => {
+        const updatedImages = updatedImagesPreview.map((image) => image.url);
+        return { ...prevProduct, images: updatedImages };
+      });
+    };
+  function SmallImage({ image }) {
+    const { attributes, listeners, setNodeRef, transform } = useSortable({ id: image.id });
+  
+    const [isDragging, setIsDragging] = useState(false);
+    const [isHovered, setIsHovered] = useState(false); // Nuevo estado para controlar el hover del botón
+  
+    const handleDragStart = () => {
+      setIsDragging(true);
+    };
+  
+    const handleDragEnd = () => {
+      setIsDragging(false);
+    };
+  
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+  
+    const handleMouseLeave = () => {
+      setIsHovered(false);
+    };
+  
+    const handleRemoveImage = (deleteIdToRemove) => {
+      const updatedImagesPreview = imagesPreview.filter((image) => image.deleteId !== deleteIdToRemove);
+      
+      setImagesPreview(updatedImagesPreview);
+      
+      const updatedNewProductImages = updatedImagesPreview.map((image) => ({
+        url: image.url,  // Incluir la URL si es un objeto imagen ya subido
+        file: image.file // Incluir el archivo si es un objeto nuevo para subir
+      }));
+      
+      setNewProduct({ ...newProduct, images: updatedNewProductImages });
+    };
+  
     let imageUrl = '';
     if (typeof image === 'string') {
       imageUrl = image;
     } else if (typeof image === 'object' && image.url) {
       imageUrl = image.url;
     }
-
+  
+    const style = {
+      transform: isHovered ? 'none' : (transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : 'none'),
+      transition: isDragging ? 'none' : 'transform 0.3s', // Controla la transición basado en si se está arrastrando o no
+      position: 'relative',
+    };
+  
     return (
       <div
         style={style}
         ref={setNodeRef}
         {...attributes}
         {...listeners}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
       >
         <img loading="lazy" className="image-item" src={imageUrl} alt="Preview" />
-        <div className="quit-image-preview" style={{ position: 'absolute', top: 0, right: 0 }}>
-          <button onClick={() => handleRemoveImage(image.deleteId)}>X</button>
+        <div className="quit-image-preview">
+          <button
+            className="quit-btn-small"
+            onClick={() => handleRemoveImage(image.deleteId)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            aria-pressed={isHovered ? 'false' : 'true'} // Controla el aria-pressed
+          >
+            X
+          </button>
         </div>
       </div>
     );
@@ -441,7 +488,7 @@ const AdminProducts = () => {
 
   const obtenerCategorias = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/products/categorias");
+      const response = await axios.get("https://disturbiaarg.com/api/products/categorias");
       setOptions(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -492,7 +539,6 @@ const AdminProducts = () => {
         />
         <div className='divpdata'>
           <p className='pdata'><em>Máximo de 5 imágenes por producto.</em></p>
-          <p className='pdata'><em>Doble click para eliminar imagenes.</em></p>
           <p className='pdata'><em>Arrastra para acomodar las imagenes.</em></p>
         </div>
         <DndContext

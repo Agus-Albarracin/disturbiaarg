@@ -43,7 +43,7 @@
     box-sizing: border-box;
 }
   .custom-checkbox {
-    position: absolute;
+    position: flex;
     width: 30px; /* Ancho del contenedor */
     height: 30px; /* Altura del contenedor */
   }
@@ -136,15 +136,25 @@
         align-items: center;
         width: 100%;
         min-width: 0;
-        height: auto;
+        height: 100px;
         margin-bottom: 20px;
         border-right: none;
+        max-height: 200px;
+        overflow: scroll;
+        border-radius: 0;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+
+    .custom-checkbox{
+        position: relative;
     }
 
     .name-check{
         margin-top: -2px;
         margin-left: 30px;
     }
+
 
     .items-grid{
         display:grid;
@@ -164,4 +174,5 @@
         width: 120px;
         margin-left: 0px;
     }
+
 }

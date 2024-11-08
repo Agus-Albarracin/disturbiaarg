@@ -9,6 +9,9 @@ export const getTickets = async (req, res) => {
         const search = req.query.search ? req.query.search.trim() : '';
         const searchDate = req.query.date ? req.query.date.trim() : '';
 
+        console.log('Search Query:', search);
+        console.log('Search Date:', searchDate);
+
         const connection = await pool.getConnection();
 
         const [totalRows] = await connection.query(`
@@ -16,8 +19,8 @@ export const getTickets = async (req, res) => {
             FROM ticket 
             WHERE status = ? 
             AND (nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR dni LIKE ? OR cel LIKE ?)
-            AND (DATE(created_at) = ? OR '' = ?)
-        `, ['approved', `%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`, searchDate, searchDate]);
+            AND (DATE(created_at) = ? OR ? = '')
+        `, ['approved', `%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`, searchDate, searchDate, '']);
 
         const totalTickets = totalRows[0].total;
         const totalPages = Math.ceil(totalTickets / limit);
@@ -45,13 +48,13 @@ export const getTickets = async (req, res) => {
             LEFT JOIN ticket_items ti ON t.ticket_id = ti.ticket_id
             WHERE t.status = 'approved' 
             AND (t.nombre LIKE ? OR t.apellido LIKE ? OR t.email LIKE ? OR t.dni LIKE ? OR t.cel LIKE ?)
-            AND (DATE(t.created_at) = ? OR '' = ?)
+            AND (DATE(t.created_at) = ? OR ? = '')
             GROUP BY t.ticket_id
             ${orderClause}
             LIMIT ?, ?
         `, [`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`, searchDate, searchDate, offset, limit]);
 
-        connection.release(); 
+        connection.release();
 
         // Procesa los resultados para convertir la columna ticket_items en un array de objetos
         const tickets = rows.map(row => ({
@@ -59,12 +62,14 @@ export const getTickets = async (req, res) => {
             ticket_items: row.ticket_items ? JSON.parse(`[${row.ticket_items}]`) : [] // Parsea la cadena JSON de ticket_items en un array de objetos
         }));
 
+        console.log('Tickets Found:', tickets.length);
         res.status(200).json({ tickets, totalPages }); // Devuelve los tickets encontrados junto con el total de páginas
     } catch (error) {
         console.error('Error fetching tickets:', error);
         res.status(500).json({ error: 'Error fetching tickets' });
     }
 };
+
 
 export const getTicketsSummary = async (req, res) => {
     try {

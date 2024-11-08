@@ -14,7 +14,7 @@ router.get('/carousel', getNavCarousel);
 router.post('/carousel', postNavCarousel);
 
 // Eliminar una imagen del carrusel
-router.delete('/carousel/:index', removeNavCarousel);
+router.delete('/carousel/:img_key', removeNavCarousel);
 
 
 export default router;

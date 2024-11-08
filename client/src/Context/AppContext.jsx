@@ -17,7 +17,7 @@ export const AppProvider = ({ children }) => {
 
     const fetchBtnnavLink = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/btnnav');
+            const response = await axios.get('https://disturbiaarg.com/api/btnnav');
             const { data } = response;
             setBtnnavLink(data.link)
         } catch (error) {
@@ -27,7 +27,7 @@ export const AppProvider = ({ children }) => {
 
     const updateBtnnavLink = async (newLink) => {
         try {
-            const response = await axios.post('http://localhost:3000/api/btnnav', { link: newLink });
+            const response = await axios.post('https://disturbiaarg.com/api/btnnav', { link: newLink });
             setBtnnavLink(newLink);
         } catch (error) {
             console.error('Error updating btnnav link:', error);
@@ -40,7 +40,7 @@ export const AppProvider = ({ children }) => {
 
     const fetchImages = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/carousel');
+            const response = await axios.get('https://disturbiaarg.com/api/carousel');
             setCarouselImages(response.data);
         } catch (error) {
             console.error('Error fetching carousel images:', error);
@@ -50,7 +50,7 @@ export const AppProvider = ({ children }) => {
 
     const addImage = async (imageUrl) => {
         try {
-            const response = await axios.post('http://localhost:3000/api/carousel', { original: imageUrl });
+            const response = await axios.post('https://disturbiaarg.com/api/carousel', { original: imageUrl });
             setCarouselImages([...carouselImages, response.data]);
         } catch (error) {
             console.error('Error adding image:', error);
@@ -59,7 +59,7 @@ export const AppProvider = ({ children }) => {
 
     const removeImage = async (img_key) => {
         try {
-            await axios.delete(`http://localhost:3000/api/carousel/${img_key}`);
+            await axios.delete(`https://disturbiaarg.com/api/carousel/${img_key}`);
             const updatedImages = carouselImages.filter(image => image.img_key !== img_key);
             setCarouselImages(updatedImages);
         } catch (error) {
@@ -71,7 +71,7 @@ export const AppProvider = ({ children }) => {
 
     const fetchShippingPrices = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/shipping');
+            const response = await axios.get('https://disturbiaarg.com/api/shipping');
             const { data } = response
             setShippingPrices(data);
         } catch (error) {
@@ -88,7 +88,7 @@ export const AppProvider = ({ children }) => {
 
     const updateShippingPrices = async (newShippingPrices) => {
         try {
-            await axios.post('http://localhost:3000/api/shipping', newShippingPrices);
+            await axios.post('https://disturbiaarg.com/api/shipping', newShippingPrices);
             setShippingPrices(newShippingPrices);
         } catch (error) {
             console.error('Error updating shipping prices:', error);
@@ -104,7 +104,7 @@ export const AppProvider = ({ children }) => {
 
     const fetchFooterInfo = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/footer');
+            const response = await axios.get('https://disturbiaarg.com/api/footer');
             setFooterInfo(response.data);
         } catch (error) {
             console.error('Error fetching footer info:', error);
@@ -113,7 +113,7 @@ export const AppProvider = ({ children }) => {
 
     const updateFooterInfo = async (newInfo) => {
         try {
-            await axios.post('http://localhost:3000/api/footer', newInfo);
+            await axios.post('https://disturbiaarg.com/api/footer', newInfo);
             setFooterInfo(newInfo); 
 
         } catch (error) {
