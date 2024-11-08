@@ -124,11 +124,11 @@ export const createOrder = async (req, res) => {
         pending: "https://disturbiaarg.com/compra",
       },
 
-      notification_url: "https://6366-2800-af0-103c-5727-f149-7d26-5c5f-b0d1.ngrok-free.app/api/webhook",
+      notification_url: "https://8373-2a02-4780-28-b873-00-1.ngrok-free.app/api/webhook",
       additional_info: dataUser,
     }
     const preference = new Preference(client);
-    const result = await preference.create({ body });
+    const result = await preference.create({ body }); 
 
     await saveOrderToDatabase(cart, dataUser, envio, modoEnvio, total, 'pending', result.collector_id);
 
