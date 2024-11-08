@@ -84,10 +84,10 @@ const AdminProducts = () => {
         };
       }
 
-      const response = await axios.get("https://disturbiaarg.com/api/productsadmin", {
+      const response = await axios.get("http://localhost:4000/api/productsadmin", {
         params
       });
-      const productsData = response.data;
+      const productsData = response.data; 
 
       if (reset) {
         setProducts(productsData);
@@ -181,7 +181,7 @@ const AdminProducts = () => {
   const updateProduct = async (productId, updatedProduct) => {
 
     try {
-      const response = await axios.post(`https://disturbiaarg.com/api/objects/${productId}`, updatedProduct, {
+      const response = await axios.post(`http://localhost:4000/api/objects/${productId}`, updatedProduct, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -225,7 +225,7 @@ const AdminProducts = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      await axios.delete(`https://disturbiaarg.com/api/products/${productId}`);
+      await axios.delete(`http://localhost:4000/api/products/${productId}`);
       setProducts(products.filter(product => product.id !== productId));
       toast.success("Se elimino el producto con éxito.")
     } catch (error) {
@@ -341,7 +341,7 @@ const uploadImages = async (images) => {
            images: imagesUrls,
            categoria: newProduct.categoria || "Otros" };
            
-        const response = await axios.post('https://disturbiaarg.com/api/products', productWithImages, {
+        const response = await axios.post('http://localhost:4000/api/products', productWithImages, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -488,7 +488,7 @@ const uploadImages = async (images) => {
 
   const obtenerCategorias = async () => {
     try {
-      const response = await axios.get("https://disturbiaarg.com/api/products/categorias");
+      const response = await axios.get("http://localhost:4000/api/products/categorias");
       setOptions(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
