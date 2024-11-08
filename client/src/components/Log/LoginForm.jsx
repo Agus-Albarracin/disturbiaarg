@@ -29,7 +29,7 @@ const GoogleLoginComponent = () => {
     }, []);
 
     const onSuccess = async (credentialResponse) => {
-        const res = await xpicker("http://localhost:4000/api/usuario", credentialResponse);
+        const res = await xpicker("http://localhost:3000/api/usuario", credentialResponse);
 
         if (res && res.user) {
             const picUrl = res.user.picture;
