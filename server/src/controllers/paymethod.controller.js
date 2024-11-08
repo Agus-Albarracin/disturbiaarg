@@ -119,9 +119,9 @@ export const createOrder = async (req, res) => {
     const body = {
       items,
       back_urls: {
-        success: "http://localhost:5173/compra",
-        failure: "http://localhost:5173/compra",
-        pending: "http://localhost:5173/compra",
+        success: "https://disturbiaarg.com/compra",
+        failure: "https://disturbiaarg.com/compra",
+        pending: "https://disturbiaarg.com/compra",
       },
 
       notification_url: "https://6366-2800-af0-103c-5727-f149-7d26-5c5f-b0d1.ngrok-free.app/api/webhook",

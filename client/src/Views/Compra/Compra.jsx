@@ -20,7 +20,7 @@ const Compra = () => {
   
   const handleFinalizarCompra = async (datosCompra) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/createOrder',{
+      const response = await axios.post('https://disturbiaarg.com/api/createOrder',{
         data : datosCompra,
         cart: cartItems,
         totalEnvio: selectedShippingOption,
