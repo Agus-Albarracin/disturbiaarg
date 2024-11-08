@@ -40,7 +40,7 @@ const AdminPanel = () => {
       try {
         const token = localStorage.getItem('authToken');
 
-        const response = await axios.get('https://disturbiaarg.com/api/admin', {
+        const response = await axios.get('http://localhost:4000/api/admin', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
